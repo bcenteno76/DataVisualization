@@ -1,0 +1,38 @@
+---
+title: "Frecuency of Surgeries per month"
+author: "Bernardo"
+date: '2022-08-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,echo=FALSE,results='hide',message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+Cirugias <- read_excel("C:/Users/berna/OneDrive/Desktop/Cirugias.xlsx")
+Cirugias%>% ggplot(aes(factor(Month, levels = c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep')),fill=Procedure))+ geom_bar()+
+  geom_text(stat = "count",aes(label = ..count..),size = 1.5, position = position_stack(vjust = 0.5))+ggtitle('Frecuency of Surgeries per month')+theme(legend.key.size = unit(0.3, 'cm'))+
+  labs(title = "Frecuency of Surgeries per Month", x = "Month", y = "Count")
+
+
+``` 
+
+
+
+```{r,echo=FALSE,results='hide',message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+Cirugias <- read_excel("C:/Users/berna/OneDrive/Desktop/Cirugias.xlsx")
+Cirugias%>%ggplot(aes(Procedure,fill=Procedure))+geom_bar()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))+
+  theme(legend.position="none")+
+  geom_text(stat = "count",aes(label = ..count..),size = 1.8, hjust = 0.5, vjust = 0.2)+
+  facet_grid(factor(Month, levels = c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'))~.)+
+  xlab('')+theme(axis.text = element_text(size = 5))+ggtitle('Frecuency of Surgeries per Month')
+                   
+``` 
